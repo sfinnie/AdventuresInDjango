@@ -215,7 +215,7 @@ admin.site.register(MyModelClass)
 
 See docs [here](https://docs.djangoproject.com/en/4.1/howto/initial-data/), in summary:
 
-1. Create a *fixture*file in the `my_app/fixtures` directory, e.g. `fund_universe.json`:
+1. Create a *fixture file* in the `my_app/fixtures` directory, e.g. `data.json`:
 
 ```json
 
