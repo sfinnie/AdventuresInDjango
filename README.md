@@ -13,7 +13,7 @@ $ . venv/bin/activate
 $ (venv) python -m pip install -U pip
 $ (venv) python -m pip install django
 $ django-admin startproject my_project .
-$ cp ~/projects/spikes/asset_health_django/.gitignore .
+$ cp ~/projects/templates/django/.gitignore .
 ```
 
 Now [create a custom user model](#custom-user-model).  Then:
