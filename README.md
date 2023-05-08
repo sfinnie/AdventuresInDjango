@@ -8,10 +8,10 @@ Notes, tips, starter code for working with Django.
 $ cd ~/projects
 $ mkdir my_project
 $ cd my_project
-$ python -m pip venv venv
+$ python3 -m pip venv venv
 $ . venv/bin/activate
-$ (venv) python -m pip install -U pip
-$ (venv) python -m pip install django
+$ (venv) python3 -m pip install -U pip
+$ (venv) python3 -m pip install django
 $ django-admin startproject my_project .
 $ cp ~/projects/templates/django/.gitignore .
 ```
@@ -19,10 +19,10 @@ $ cp ~/projects/templates/django/.gitignore .
 Now [create a custom user model](#custom-user-model).  Then:
 
 ```bash
-$ python manage.py makemigrations
-$ python manage.py migrate
-$ winpty python manage.py createsuperuser
-$ winpty python manage.py runserver # open browser at http://localhost:8000
+$ python3 manage.py makemigrations
+$ python3 manage.py migrate
+$ winpty python3 manage.py createsuperuser
+$ winpty python3 manage.py runserver # open browser at http://localhost:8000
 <Ctrl-C>
 $ 
 ```
@@ -39,7 +39,7 @@ $ mkdir -p static/css
 
 Then edit `my_project/settings.py` to update the TEMPLATES setting:
 
-```python
+```python3
 TEMPLATES = [
     {
         # ...
@@ -62,11 +62,11 @@ All project templates can then go into the shared `templates` dir.
 Django projects are composed of *apps*.  It's not possible to have a project without at least one app.  To add one:
 
 ```bash
-$ python manage.py startapp my_app
+$ python3 manage.py startapp my_app
 ```
 Then edit `my_project/settings.py` to add the new app:
 
-```python
+```python3
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,12 +85,12 @@ INSTALLED_APPS = [
 Do this by default.  There's little downside if it's not used, and a world of pain if you subsequently find out you need it.
 
 ```bash
-$ python manage.py startapp accounts
+$ python3 manage.py startapp accounts
 ```
 
 Update `my_project/settings.py` to add the new app:
 
-```python
+```python3
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -108,7 +108,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser' # new
 
 Update `accounts/models.py` to define the custom User model:
 
-```python
+```python3
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -121,7 +121,7 @@ class CustomUser(AbstractUser):
 
 Needs custom versions of the User Creation & Update forms.  In `accounts/forms.py`:
 
-```python
+```python3
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .models import CustomUser
@@ -144,7 +144,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 Now update `accounts/admin.py`:
 
-```python
+```python3
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
@@ -178,7 +178,7 @@ All below are in the context of the `my_app` directory in of the project root
 
 In `my_app/models.py`:
 
-```python
+```python3
 from django.db import models
 
 class MyModelClass(models.Model):
@@ -195,15 +195,15 @@ It's good practice to include a `__str__` method as it's used by the `admin` app
 Any time a model is added or changed, the DB needs updated.
 
 ```bash
-$ python manage.py makemigrations my_app
-$ python manage.py migrate
+$ python3 manage.py makemigrations my_app
+$ python3 manage.py migrate
 ```
 
 ### Registering models for the admin site
 
 Edit `my_app/admin.py` as follows:
 
-```python
+```python3
 from django.contrib import admin
 
 from .models import MyModelClass
@@ -228,7 +228,7 @@ See docs [here](https://docs.djangoproject.com/en/4.1/howto/initial-data/), in s
 
 Add the following to `my_project/urls.py`:
 
-```python
+```python3
 admin.site.site_header = "My Site Admin"
 admin.site.site_title = "My Site Admin"
 ```
@@ -237,13 +237,13 @@ admin.site.site_title = "My Site Admin"
 
 ### Customising the admin site
 
-Read [this](https://realpython.com/customize-django-admin-python/).
+Read [this](https://realpython3.com/customize-django-admin-python3/).
 
 ## Accessing the admin site
 
 Ensure superuser is set up first (see starting a project).
 ```bash
-$ python manage.py runserver
+$ python3 manage.py runserver
 ```
 
 Browse to [http://localhost:8000/admin](http://localhost:8000/admin).
@@ -253,7 +253,7 @@ Browse to [http://localhost:8000/admin](http://localhost:8000/admin).
 
 There are two types of view: function-based and class-based.  There's a convenient template for class-based views that render templates.  In `my_app/views.py`:
 
-```python
+```python3
 from django.views.generic import TemplateView
 
 class HomePageView(TemplateView):
@@ -262,7 +262,7 @@ class HomePageView(TemplateView):
 
 Edit `my_project/urls.py`:
 
-```python
+```python3
 from django.contrib import admin
 from django.urls import path, include
 
@@ -274,7 +274,7 @@ urlpatterns = [
 
 And `my_app/urls.py`:
 
-```python
+```python3
 from django.urls import path
 from .views import HomePageView
 
@@ -306,7 +306,7 @@ Now create `templates/home.html`:
 Now run the server and check:
 
 ```bash
-$ python manage.py runserver
+$ python3 manage.py runserver
 ```
 
 And load [http://localhost:8000](http://localhost:8000)
